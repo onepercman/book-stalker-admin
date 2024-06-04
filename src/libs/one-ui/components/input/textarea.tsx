@@ -65,7 +65,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       if (showClear && clearable) {
         return (
           <LuX
-            className="text-secondary cursor-pointer"
+            className="cursor-pointer text-secondary"
             onClick={function () {
               if (internalRef.current) {
                 setShowClear(false)
@@ -180,7 +180,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           {_renderAddonAfter()}
         </div>
         <Ark.Presence
-          className="text-error animate-in fade-in text-xs"
+          className="text-error text-xs animate-in fade-in"
           present={Boolean(invalid && invalidMessage)}
         >
           {invalidMessage}

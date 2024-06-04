@@ -25,7 +25,7 @@ export const Layout: FC = () => {
         {!jwt ? (
           <div
             className={cn(
-              "animate-in fade-in flex h-screen max-h-screen w-full items-start justify-start duration-1000 ease-out",
+              "flex h-screen max-h-screen w-full items-start justify-start duration-1000 ease-out animate-in fade-in",
               vh < 640 ? "flex-col" : "",
             )}
           >
