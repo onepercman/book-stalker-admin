@@ -1,4 +1,4 @@
-import { Container } from "@/libs/one-ui/components"
+import { Container } from "@/libs/one-ui"
 import { Button, Card, CardBody, CardHeader, Input } from "@nextui-org/react"
 import { FC } from "react"
 import { Controller, useForm } from "react-hook-form"

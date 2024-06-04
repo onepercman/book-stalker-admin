@@ -1,5 +1,5 @@
 import { useViewWidth } from "@/libs/custom-hooks/use-view-width"
-import { cn } from "@/libs/one-ui/utils"
+import { cn } from "@/libs/one-ui"
 import {
   NavbarContent,
   NavbarItem,
