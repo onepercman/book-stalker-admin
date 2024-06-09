@@ -1,5 +1,9 @@
-import { AdminService } from "./admin.service"
+import { BookService } from "./book.service"
+import { CategoryService } from "./category.service"
+import { UserService } from "./user.service"
 
 export const Service = {
-  admin: new AdminService(),
+  user: new UserService(),
+  book: new BookService(),
+  category: new CategoryService(),
 }

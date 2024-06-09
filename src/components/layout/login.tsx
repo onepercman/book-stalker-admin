@@ -6,9 +6,7 @@ import { Controller, useForm } from "react-hook-form"
 import { LuEye, LuEyeOff } from "react-icons/lu"
 
 export const Login: FC = () => {
-  const form = useForm<LoginDTO>({
-    // mode: "all",
-  })
+  const form = useForm<LoginDTO>()
 
   const [showPassword, setShowPassword] = useState(false)
 
@@ -86,7 +84,12 @@ export const Login: FC = () => {
                 />
               )}
             />
-            <Button size="lg" type="submit" color="primary">
+            <Button
+              size="lg"
+              type="submit"
+              color="primary"
+              isLoading={form.formState.isSubmitting}
+            >
               Đăng nhập
             </Button>
           </CardBody>

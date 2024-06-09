@@ -1,10 +1,10 @@
 import { api } from "@/libs/axios"
 
-export class AdminService {
+export class UserService {
   login(data: LoginDTO) {
     return api.request({
       method: "POST",
-      url: "/admin/login",
+      url: "/user/login/admin",
       data,
     })
   }

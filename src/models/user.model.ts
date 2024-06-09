@@ -5,7 +5,7 @@ export class UserModel {
   jwt?: string
 
   async login(dto: LoginDTO) {
-    const res = await Service.admin.login(dto)
+    const res = await Service.user.login(dto)
     if (res.data) {
       this.user = res.data.user
       this.jwt = res.data.jwt

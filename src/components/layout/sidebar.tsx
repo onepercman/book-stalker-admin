@@ -20,7 +20,7 @@ export const Sidebar: FC = () => {
     <Navbar
       className="bg-content1 shadow"
       classNames={{
-        item: "px-3 py-2 rounded hover:text-primary data-[active]:bg-primary transition-colors data-[active]:text-white data-[active]:hover:text-white",
+        item: "px-3 py-2 rounded hover:text-primary data-[active]:bg-primary transition-colors data-[active]:text-white data-[active]:hover:text-white data-[active]:font-normal",
         menuItem:
           "px-3 py-2 rounded hover:text-primary data-[active]:bg-primary transition-colors data-[active]:text-white data-[active]:hover:text-white",
       }}
