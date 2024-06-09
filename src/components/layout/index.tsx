@@ -1,8 +1,7 @@
 import { useViewWidth } from "@/libs/custom-hooks/use-view-width"
-import { cn } from "@/libs/one-ui"
 import { useStore } from "@/libs/valtio"
 import userStore from "@/stores/user.store"
-import { Button, NextUIProvider } from "@nextui-org/react"
+import { Button, NextUIProvider, cn } from "@nextui-org/react"
 import { ThemeProvider, useTheme } from "next-themes"
 import { FC } from "react"
 import { LuMoon, LuSun } from "react-icons/lu"
@@ -22,7 +21,7 @@ export const Layout: FC = () => {
   return (
     <ThemeProvider defaultTheme="light">
       <NextUIProvider navigate={navigate}>
-        {!jwt ? (
+        {jwt ? (
           <div
             className={cn(
               "flex h-screen max-h-screen w-full items-start justify-start duration-1000 ease-out animate-in fade-in",

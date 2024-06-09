@@ -1,5 +1,4 @@
 import { useViewWidth } from "@/libs/custom-hooks/use-view-width"
-import { cn } from "@/libs/one-ui"
 import {
   NavbarContent,
   NavbarItem,
@@ -7,6 +6,7 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
   Navbar as NextUINavbar,
+  cn,
 } from "@nextui-org/react"
 import { FC } from "react"
 import { Link, useLocation } from "react-router-dom"

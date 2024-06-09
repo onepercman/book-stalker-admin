@@ -20,13 +20,12 @@ const requestHandler = {
 const responseHandler = {
   onFulfilled(response: AxiosResponse) {
     response.statusText = ""
-    response.data = response.data.data
     return Promise.resolve(response)
   },
   onRejected(error: AxiosError) {
     if (error.response?.data) {
       const data = error.response.data as any
-      error.response.statusText = data["errorMsg"] || data["errorCode"]
+      error.response.statusText = data["message"] || data["error"]
       error.response.data = null
     } else {
       error.response!.statusText = "Connection lost"

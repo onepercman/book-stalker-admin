@@ -1,15 +1,29 @@
-import { Container } from "@/libs/one-ui"
+import userStore from "@/stores/user.store"
 import { Button, Card, CardBody, CardHeader, Input } from "@nextui-org/react"
-import { FC } from "react"
+import { Container } from "mojaui"
+import { FC, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
+import { LuEye, LuEyeOff } from "react-icons/lu"
 
 export const Login: FC = () => {
   const form = useForm<LoginDTO>({
-    mode: "onBlur",
+    // mode: "all",
   })
 
-  async function submit({ email, password }: LoginDTO) {
-    alert(email + " " + password)
+  const [showPassword, setShowPassword] = useState(false)
+
+  async function submit(dto: LoginDTO) {
+    const { statusText } = await userStore.login(dto)
+    if (statusText) {
+      if (
+        statusText.toLowerCase().includes("tài khoản") ||
+        statusText.toLowerCase().includes("email")
+      ) {
+        form.setError("email", { message: statusText })
+      } else {
+        form.setError("password", { message: statusText })
+      }
+    }
   }
 
   return (
@@ -49,13 +63,26 @@ export const Login: FC = () => {
               rules={{
                 required: "Hãy nhập mật khẩu của bạn",
               }}
-              render={({ field }) => (
+              render={({ field, fieldState }) => (
                 <Input
                   {...field}
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   variant="bordered"
                   label="Mật khẩu"
                   classNames={{ label: "text-secondary" }}
+                  isInvalid={fieldState.invalid}
+                  errorMessage={fieldState.error?.message}
+                  endContent={
+                    form.watch("password") ? (
+                      <Button
+                        size="sm"
+                        variant="light"
+                        isIconOnly
+                        startContent={showPassword ? <LuEyeOff /> : <LuEye />}
+                        onClick={() => setShowPassword((p) => !p)}
+                      />
+                    ) : null
+                  }
                 />
               )}
             />
