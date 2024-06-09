@@ -1,4 +1,6 @@
 interface User {
-  id: string
-  createdAt: string
+  _id: string
+  name: string
+  email: string
+  avatar: string
 }
