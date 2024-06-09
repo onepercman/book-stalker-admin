@@ -1,6 +1,6 @@
+import { AddBook } from "@/components/book/add-book"
+import { useBookList } from "@/hooks/use-book-list"
 import { useCategories } from "@/hooks/use-categories"
-import { useDebounce } from "@/libs/custom-hooks/use-debounce"
-import { Service } from "@/services/app.service"
 import {
   Button,
   Chip,
@@ -15,31 +15,22 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react"
-import { useQuery } from "@tanstack/react-query"
 import { Container, Pagination } from "mojaui"
-import { useState } from "react"
-import { LuFileEdit, LuListPlus, LuSearch, LuTrash } from "react-icons/lu"
+import { LuFileEdit, LuSearch, LuTrash } from "react-icons/lu"
 
 export default function () {
   const { data: categories } = useCategories()
 
-  const [categoryId, setCategoryId] = useState<string>()
-  const [searchText, setSearchText] = useState<string>()
-  const search = useDebounce(searchText, 500)
-  const [page, setPage] = useState<number>(1)
-
-  const { data, isFetching } = useQuery({
-    queryKey: ["book list", page, search, categoryId],
-    async queryFn() {
-      const { data } = await Service.book.list({
-        search,
-        categoryId,
-        page,
-        take: 20,
-      })
-      return data
-    },
-  })
+  const {
+    data,
+    isFetching,
+    categoryId,
+    setCategoryId,
+    searchText,
+    setSearchText,
+    page,
+    setPage,
+  } = useBookList()
 
   function _renderTop() {
     return (
@@ -79,14 +70,7 @@ export default function () {
               onPageChange={({ page }) => setPage(page)}
             />
           </div>
-          <Button
-            size="sm"
-            color="primary"
-            endContent={<LuListPlus />}
-            className="self-end"
-          >
-            Thêm sách mới
-          </Button>
+          <AddBook />
         </div>
       </div>
     )

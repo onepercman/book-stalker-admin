@@ -46,6 +46,8 @@ export const Sidebar: FC = () => {
 
       <NavbarContent justify="end">
         <Button
+          size="sm"
+          variant="ghost"
           color="danger"
           endContent={<LuLogOut />}
           onClick={() => userStore.logout()}
