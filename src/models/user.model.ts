@@ -17,5 +17,6 @@ export class UserModel {
 
   logout() {
     this.user = undefined
+    this.jwt = undefined
   }
 }

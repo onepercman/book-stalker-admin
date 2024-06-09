@@ -1,9 +1,8 @@
-import { useViewWidth } from "@/libs/custom-hooks/use-view-width"
 import { useStore } from "@/libs/valtio"
 import userStore from "@/stores/user.store"
-import { Button, NextUIProvider, cn } from "@nextui-org/react"
+import { Button, NextUIProvider } from "@nextui-org/react"
 import { ThemeProvider, useTheme } from "next-themes"
-import { FC } from "react"
+import { FC, Fragment } from "react"
 import { LuMoon, LuSun } from "react-icons/lu"
 import { Outlet, useNavigate } from "react-router-dom"
 import { Login } from "./login"
@@ -13,26 +12,14 @@ export const Layout: FC = () => {
   const navigate = useNavigate()
   const { jwt } = useStore(userStore)
 
-  const vh = useViewWidth() || 0
-  const panelMainClass = cn(
-    "flex flex-col w-full h-full max-h-screen overflow-y-auto bg-base-100 transition-all",
-  )
-
   return (
     <ThemeProvider defaultTheme="light">
       <NextUIProvider navigate={navigate}>
         {jwt ? (
-          <div
-            className={cn(
-              "flex h-screen max-h-screen w-full items-start justify-start duration-1000 ease-out animate-in fade-in",
-              vh < 640 ? "flex-col" : "",
-            )}
-          >
+          <Fragment>
             <Sidebar />
-            <main className={panelMainClass}>
-              <Outlet />
-            </main>
-          </div>
+            <Outlet />
+          </Fragment>
         ) : (
           <Login />
         )}
