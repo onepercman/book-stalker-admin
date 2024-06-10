@@ -6,7 +6,7 @@ export function useCategories() {
     queryKey: ["category list"],
     async queryFn() {
       const { data } = await Service.category.list()
-      return [...data]
+      return data
     },
   })
 }

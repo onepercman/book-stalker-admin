@@ -17,32 +17,25 @@ import {
 } from "@nextui-org/react"
 import { FC, Fragment } from "react"
 import { Controller, useForm } from "react-hook-form"
-import { LuListPlus, LuPlus, LuUpload } from "react-icons/lu"
+import { LuFileEdit, LuPlus, LuUpload } from "react-icons/lu"
 
-const defaultValues: Partial<Book> = {
-  name: "",
-  categoryId: "",
-  thumbnail: "",
-  uri: "",
-}
-
-export const AddBook: FC = () => {
+export const EditBook: FC<{ book: Book }> = ({ book }) => {
   const { data: categories } = useCategories()
   const { isOpen, onOpenChange, getButtonProps } = useDisclosure()
 
   const { refetch } = useBookList()
 
-  const form = useForm<Book>({ defaultValues })
+  const form = useForm<Book>({ defaultValues: book })
 
   async function submit(book: Book) {
-    const { data } = await Service.book.create(book)
+    const { data } = await Service.book.edit(book._id, book)
     if (data) {
       form.reset()
       onOpenChange()
-      toaster.create({ type: "success", title: "Tạo sách mới thành công" })
+      toaster.create({ type: "success", title: "Cập nhật thành công" })
       refetch()
     } else {
-      toaster.create({ type: "error", title: "Tạo sách thất bại" })
+      toaster.create({ type: "error", title: "Cập nhật thất bại" })
     }
   }
 
@@ -75,14 +68,11 @@ export const AddBook: FC = () => {
   return (
     <Fragment>
       <Button
-        size="sm"
-        color="primary"
-        endContent={<LuListPlus />}
-        className="self-end"
+        color="success"
+        startContent={<LuFileEdit />}
+        isIconOnly
         {...getButtonProps()}
-      >
-        Thêm sách mới
-      </Button>
+      />
       <Modal
         isOpen={isOpen}
         onOpenChange={function () {
@@ -91,7 +81,7 @@ export const AddBook: FC = () => {
         }}
       >
         <ModalContent as="form" onSubmit={form.handleSubmit(submit)}>
-          <ModalHeader>Thêm sách mới</ModalHeader>
+          <ModalHeader>Cập nhật sách</ModalHeader>
           <ModalBody>
             <Controller
               control={form.control}
@@ -175,7 +165,7 @@ export const AddBook: FC = () => {
               type="submit"
               isLoading={form.formState.isSubmitting}
             >
-              Thêm
+              Cập nhật
             </Button>
           </ModalFooter>
         </ModalContent>

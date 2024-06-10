@@ -1,6 +1,9 @@
 import { AddBook } from "@/components/book/add-book"
+import { EditBook } from "@/components/book/edit-book"
 import { useBookList } from "@/hooks/use-book-list"
 import { useCategories } from "@/hooks/use-categories"
+import { toaster } from "@/libs/toast"
+import { Service } from "@/services/app.service"
 import {
   Button,
   Chip,
@@ -15,8 +18,8 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react"
-import { Container, Pagination } from "mojaui"
-import { LuFileEdit, LuSearch, LuTrash } from "react-icons/lu"
+import { Container, Dialog, Pagination } from "mojaui"
+import { LuSearch, LuTrash } from "react-icons/lu"
 
 export default function () {
   const { data: categories } = useCategories()
@@ -30,7 +33,22 @@ export default function () {
     setSearchText,
     page,
     setPage,
+    refetch,
   } = useBookList()
+
+  async function deleteItem(id: string) {
+    const confirmed = await Dialog.confirm({
+      question: "Bạn có chắc chắn xoá ?",
+    })
+    if (!confirmed) return
+    const { data } = await Service.book.delete(id)
+    if (data) {
+      toaster.create({ type: "success", title: "Xoá thành công" })
+      refetch()
+    } else {
+      toaster.create({ type: "success", title: "Xoá thành công" })
+    }
+  }
 
   function _renderTop() {
     return (
@@ -101,15 +119,12 @@ export default function () {
                 <TableCell>{el.name}</TableCell>
                 <TableCell>{el.category?.name}</TableCell>
                 <TableCell className="flex items-center gap-2">
-                  <Button
-                    color="success"
-                    startContent={<LuFileEdit />}
-                    isIconOnly
-                  />
+                  <EditBook book={el} />
                   <Button
                     color="danger"
                     startContent={<LuTrash />}
                     isIconOnly
+                    onClick={() => deleteItem(el._id)}
                   />
                 </TableCell>
               </TableRow>

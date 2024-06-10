@@ -41,4 +41,8 @@ jobs:
             docker rm -f book-stalker-admin || true
             docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/book-stalker-admin:latest || true
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/book-stalker-admin:latest
+<<<<<<< Updated upstream
             docker run -itd --restart always --name book-stalker-admin -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/book-stalker-admin:latest
+=======
+            docker run -itd --restart always --name book-stalker-admin -p 4001:4001 ${{ secrets.DOCKERHUB_USERNAME }}/book-stalker-admin:latest
+>>>>>>> Stashed changes

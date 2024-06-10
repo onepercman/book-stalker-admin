@@ -15,7 +15,7 @@
     "build:production": "tsc && vite build --mode production",
     "preview": "vite preview",
     "lint": "eslint src/**/**.{ts,tsx}",
-    "format": "prettier --write .",
+    "format": "prettier --write ./src",
     "tsc": "tsc --pretty --noEmit",
     "test": "vitest",
     "postinstall": "husky install"

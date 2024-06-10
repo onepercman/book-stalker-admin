@@ -1,5 +1,5 @@
 import { nextui } from "@nextui-org/react"
-import { colorize } from "tailwind-schemes"
+import { colorize, schemes } from "tailwind-schemes"
 import tailwindScrollbar from "tailwind-scrollbar"
 import type { Config } from "tailwindcss"
 import tailwindAnimate from "tailwindcss-animate"
@@ -77,6 +77,18 @@ const config: Config = {
             warning: colorize(colors.yellow, "500", "50"),
             danger: colorize(colors.rose, "500", "50"),
           },
+        },
+      },
+    }),
+    schemes({
+      schemes: {
+        dark: {
+          component: colors.gray[900],
+          line: colors.gray[800],
+        },
+        light: {
+          component: colors.gray[100],
+          line: colors.gray[200],
         },
       },
     }),
