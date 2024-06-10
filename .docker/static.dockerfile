@@ -4,7 +4,7 @@ FROM node:18-alpine3.17 as BASE
 LABEL author="onepercman"
 
 RUN corepack enable
-RUN corepack prepare pnpm@8.8.0 --activate
+RUN corepack prepare pnpm@8.15.4 --activate
 
 WORKDIR /app
 
