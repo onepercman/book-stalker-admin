@@ -26,13 +26,19 @@ export const Sidebar: FC = () => {
       }}
     >
       <NavbarContent>
-        <NavbarMenuToggle className="sm:hidden" />
+        <NavbarMenuToggle className="lg:hidden" />
         <NavbarBrand>
-          <Link to="/">LOGO</Link>
+          <Link to="/" className="inline-flex items-center gap-2">
+            <img src="/logo/logo.png" className="h-10" />
+            <div>
+              <div className="font-semibold">Bookstalker</div>
+              <div className="text-xs font-medium text-secondary">admin</div>
+            </div>
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden gap-2 sm:flex" justify="start">
+      <NavbarContent className="hidden gap-2 lg:flex" justify="start">
         <NavbarItem isActive={pathname === "/book"}>
           <Link to="/book">Quản lý sách</Link>
         </NavbarItem>
